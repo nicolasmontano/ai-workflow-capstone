@@ -6,9 +6,9 @@ from datetime import date,timedelta
 import numpy as np
 import shutil
 import pandas as pd
-#def fetch_data(data_dir):
-    
+import time
 
+ 
 
 def fetch_data(data_dir):
     '''   
@@ -115,7 +115,7 @@ def fetch_ts(data_dir,restart=False):
     
     if len(csvs)>0:
         print('Reading processeded data from: {}'.format(ts_data_dir))
-        return {re.sub('.csv','',file):pd.read_csv(join(ts_data_dir,file))for file in csvs}
+        return {re.sub('.csv','',file):pd.read_csv(join(ts_data_dir,file),parse_dates=['date'])for file in csvs}
     
 
     #Load the original data in case there is no processed data
@@ -152,6 +152,10 @@ def fetch_ts(data_dir,restart=False):
 FEATURE ENGINEERING
 '''
 def create_lag(df,cols,lags,join_keys,date_col):
+    '''
+    join_keys: list
+    date_col: str 
+    '''
     for col in cols:
         for lag in lags:
             db1=df.copy()
@@ -165,9 +169,16 @@ def create_lag(df,cols,lags,join_keys,date_col):
     return df
 
 
+
 if __name__=='__main__':
+    run_start = time.time() 
+    
     data_dir=r'C:\Users\nomic\Desktop\final project ibm\data'
-    dfs=fetch_ts(data_dir,restart=True)
+    dfs=fetch_ts(data_dir,restart=False)
+    
+    m, s = divmod(time.time()-run_start,60)
+    h, m = divmod(m, 60)
+    print("load time:", "%d:%02d:%02d"%(h, m, s))
 
     
     
