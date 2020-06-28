@@ -168,8 +168,6 @@ def create_lag(df,cols,lags,join_keys,date_col):
     df=df.fillna(0)    
     return df
 
-
-
 if __name__=='__main__':
     run_start = time.time() 
     
