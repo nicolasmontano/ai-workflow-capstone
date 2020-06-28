@@ -35,7 +35,8 @@ import logging
 logger=logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-formatter=logging.Formatter('%(message)s')
+formatter=logging.Formatter('%(asctime)s------ %(message)s')
+
 
 file_handler=logging.FileHandler('Info.log')
 file_handler.setLevel(logging.INFO)
@@ -232,7 +233,7 @@ def training_models(df,MODEL_VERSION,MODEL_DIR):
     m, s = divmod(time.time()-run_start,60)
     h, m = divmod(m, 60)
     
-    logger.info('{0:.0f}:{1:.0f}:{2:.0f}'.format(h, m, s))
+    logger.info('Training time: {0:.0f}:{1:.0f}:{2:.0f}'.format(h, m, s))
     
     return results
 
@@ -245,7 +246,7 @@ if __name__=='__main__':
     MODEL_DIR=r'C:\Users\nomic\Desktop\final project ibm\models'
     
     df=load_data(data_dir)
-    a=training(df,MODEL_VERSION,MODEL_DIR)
+    a=training_models(df,MODEL_VERSION,MODEL_DIR)
 
     m, s = divmod(time.time()-run_start,60)
     h, m = divmod(m, 60)
