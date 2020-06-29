@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jun 28 00:47:13 2020
-@author: Jonathan.Venezia@ibm.com
-"""
-
 from flask import Flask, jsonify, request, send_from_directory
 import joblib
 import socket
@@ -73,4 +66,4 @@ def logs(filename):
     return send_from_directory(log_dir, filename, as_attachment=True)        
             
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080,debug=True)
+    app.run(port=8080,debug=False)
